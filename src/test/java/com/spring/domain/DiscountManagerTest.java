@@ -6,122 +6,65 @@ import static org.junit.Assert.assertEquals;
 import org.junit.*;
 
 public class DiscountManagerTest {
-    
-    private DiscountManager discountManager;
-    private Customer customer;
+
+    private static final double DOUBLE_DELTA = 0.001;
+
+    private DiscountManager discountManager = new DiscountManager();
+    private Customer customer = new Customer();
     private Order order;
-    
-    public DiscountManagerTest() {
-    }
-
-    @BeforeClass
-    public static void setUpClass() throws Exception {
-    }
-
-    @AfterClass
-    public static void tearDownClass() throws Exception {
-    }
     
     @Before
     public void setUp() {
-        discountManager = new DiscountManager();
-        customer = new Customer();
         order = new Order(customer, OrderState.NEW, new ArrayList()); 
     }
-    
-    @After
-    public void tearDown() {
-        discountManager = null;
-        customer = null;
-        order = null; 
+
+    @Test
+    public void shouldReturnZeroIfNoDiscount() {
+        fillOrderWithPizzas(4);
+
+        assertEquals(0, discountManager.getTotalDiscount(order), DOUBLE_DELTA);
     }
 
-    /**
-     * Fills order with pizzas, where each next pizza has params according to pizza number
-     * @param numberOfPizzas number of pizzas to create
-     */
+    @Test
+    public void shouldReturnCorrectTotalDiscountForAllDiscounts() {
+        fillOrderWithPizzas(5);
+        customer.setDiscountCard(createDiscountCardWithPoints(20));
+
+        assertEquals(3.5, discountManager.getTotalDiscount(order), DOUBLE_DELTA);
+    }
+
+    @Test
+    public void shouldReturnMaxDiscountValueWhenCalculatedDiscountMoreThanMax() {
+        fillOrderWithPizzas(4);
+        customer.setDiscountCard(createDiscountCardWithPoints(50));
+
+        assertEquals(3, discountManager.getTotalDiscount(order), DOUBLE_DELTA);
+    }
+
+    @Test
+    public void shouldReturnCorrectDiscountForCard() {
+        fillOrderWithPizzas(4);
+        customer.setDiscountCard(createDiscountCardWithPoints(20));
+
+        assertEquals(2, discountManager.getTotalDiscount(order), DOUBLE_DELTA);
+    }
+
+    @Test
+    public void shouldReturnCorrectDiscountForBiggestPizza() {
+        fillOrderWithPizzas(5);
+
+        assertEquals(1.5, discountManager.getTotalDiscount(order), DOUBLE_DELTA);
+    }
+
     private void fillOrderWithPizzas(int numberOfPizzas) {
-        List<Pizza> pizzas = new ArrayList<Pizza>();
-        for(int param = 1; param <= numberOfPizzas; param++)
-            pizzas.add(new Pizza(param, String.valueOf(param), Double.valueOf(param), Pizza.PizzaType.MEAT));
+        List<Pizza> pizzas = new ArrayList<>();
+        for(int pizzaNumber = 1; pizzaNumber <= numberOfPizzas; pizzaNumber++)
+            pizzas.add(new Pizza(pizzaNumber, String.valueOf(pizzaNumber), Double.valueOf(pizzaNumber), Pizza.PizzaType.MEAT));
         order.addPizzas(pizzas);
         order.setCurrentPrice(order.getTotalPrice());
     }
-    
-    /**
-     * Creates discount card for customer
-     * @param points points on discount card
-     */
-    private DiscountCard createDiscountCard(Double points) {
+
+    private DiscountCard createDiscountCardWithPoints(double points) {
         return new DiscountCard(1, customer, points);
     }
-
-    /**
-     * Test of getTotalDiscount method, of class DiscountManager, no discount should be
-     */
-    @Test
-    public void testGetTotalDiscount_NoDiscounts() {
-        Double expectedDiscount = 0.0;
-        fillOrderWithPizzas(4);
-        
-        Double discount = discountManager.getTotalDiscount(order);
-        
-        assertEquals(expectedDiscount, discount);
-    }
-    
-    /**
-     * Test of getTotalDiscount method, of class DiscountManager, all discounts should be
-     */
-    @Test
-    public void testGetTotalDiscount_AllDiscounts() {
-        Double expectedDiscount = 3.5;
-        fillOrderWithPizzas(5);
-        customer.setDiscountCard(createDiscountCard(20.0));
-        
-        Double discount = discountManager.getTotalDiscount(order);
-        
-        assertEquals(expectedDiscount, discount);
-    }
-    
-    /**
-     * Test of getTotalDiscount method, of class DiscountManager, discount for discount card should be
-     */
-    @Test
-    public void testGetTotalDiscount_DiscountForDiscountCardMoreThan30PercentFromTotalPrice() {
-        Double expectedDiscount = 3.0;
-        fillOrderWithPizzas(4);
-        customer.setDiscountCard(createDiscountCard(50.0));
-        
-        Double discount = discountManager.getTotalDiscount(order);
-        
-        assertEquals(expectedDiscount, discount);
-    }
-    
-    /**
-     * Test of getTotalDiscount method, of class DiscountManager, discount for discount card should be
-     */
-    @Test
-    public void testGetTotalDiscount_DiscountForDiscountCard() {
-        Double expectedDiscount = 2.0;
-        fillOrderWithPizzas(4);
-        customer.setDiscountCard(createDiscountCard(20.0));
-        
-        Double discount = discountManager.getTotalDiscount(order);
-        
-        assertEquals(expectedDiscount, discount);
-    }
-    
-    /**
-     * Test of getTotalDiscount method, of class DiscountManager, discount for large order should be
-     */
-    @Test
-    public void testGetTotalDiscount_DiscountForLargeOrder() {
-        Double expectedDiscount = 1.5;
-        fillOrderWithPizzas(5);
-        
-        Double discount = discountManager.getTotalDiscount(order);
-        
-        assertEquals(expectedDiscount, discount);
-    }
-    
 }

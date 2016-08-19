@@ -6,64 +6,27 @@ import static org.junit.Assert.assertEquals;
 import org.junit.*;
 
 public class OrderTest {
-    
-    private Order order;
-    
-    public OrderTest() {
+
+    private static final double DOUBLE_DELTA = 0.001;
+
+    private Order order = new Order();
+
+    @Test
+    public void shouldReturnZeroPriceFotEmptyOrder() {
+        assertEquals(0, order.getTotalPrice(), DOUBLE_DELTA);
     }
 
-    @BeforeClass
-    public static void setUpClass() throws Exception {
+    @Test
+    public void shouldReturnCorrectPriceForNotEmptyOrder() {
+        order.addPizzas(createListOfPizzas(3));
+
+        assertEquals(6, order.getTotalPrice(), DOUBLE_DELTA);
     }
 
-    @AfterClass
-    public static void tearDownClass() throws Exception {
-    }
-    
-    @Before
-    public void setUp() {
-        order = new Order();
-    }
-    
-    @After
-    public void tearDown() {
-        order = null;
-    }
-
-    /**
-     * Fills order with pizzas, where each next pizza has params according to pizza number
-     * @param numberOfPizzas number of pizzas to create
-     */
-    private List<Pizza> createListOfPizzas(int numberOfPizzas) {
-        List<Pizza> pizzas = new ArrayList<Pizza>();
-        for(int param = 1; param <= numberOfPizzas; param++)
-            pizzas.add(new Pizza(param, String.valueOf(param), Double.valueOf(param), Pizza.PizzaType.MEAT));
+    private List<Pizza> createListOfPizzas(int amountOfPizzas) {
+        List<Pizza> pizzas = new ArrayList<>();
+        for(int pizzaNumber = 1; pizzaNumber <= amountOfPizzas; pizzaNumber++)
+            pizzas.add(new Pizza(pizzaNumber, String.valueOf(pizzaNumber), Double.valueOf(pizzaNumber), Pizza.PizzaType.MEAT));
         return pizzas;
     }
-
-    /**
-     * Test of getTotalPrice method, of class Order, get total price of empty order
-     */
-    @Test
-    public void testGetTotalPrice_OfEmptyOrder() {
-        Double expectedPrice = 0.0;
-        
-        Double resultPrice = order.getTotalPrice();
-        
-        assertEquals(expectedPrice, resultPrice);
-    }
-    
-    /**
-     * Test of getTotalPrice method, of class Order, get total price of order with pizzas
-     */
-    @Test
-    public void testGetTotalPrice_OfOrderWithPizzas() {
-        order.addPizzas(createListOfPizzas(3));
-        Double expectedPrice = 6.0;
-        
-        Double resultPrice = order.getTotalPrice();
-        
-        assertEquals(expectedPrice, resultPrice);
-    }
-    
 }
