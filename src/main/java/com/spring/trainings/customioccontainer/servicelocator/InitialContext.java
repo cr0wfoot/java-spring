@@ -8,12 +8,8 @@ import java.util.logging.Logger;
 public class InitialContext {
     
     private volatile static InitialContext instance;
-    private Config config;
-    
-    private InitialContext() {
-        this.config = new JavaConfig();
-    }
-    
+    private Config config = new JavaConfig();
+
     public static InitialContext getInstance() {
         InitialContext localInstance = instance;
         if (localInstance == null)
@@ -28,8 +24,7 @@ public class InitialContext {
     public <T> T lookup(String ifc) {
         try {
             Class<T> clazz = config.getImpl(ifc);
-            T object = clazz.newInstance();
-            return object;
+            return clazz.newInstance();
         } catch (InstantiationException ex) {
             Logger.getLogger(InitialContext.class.getName()).log(Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
@@ -37,5 +32,4 @@ public class InitialContext {
         }
         return null;
     }
-    
 }

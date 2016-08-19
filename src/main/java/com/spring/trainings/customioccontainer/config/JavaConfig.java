@@ -10,19 +10,17 @@ import java.util.Map;
 
 public class JavaConfig implements Config {
     
-    private Map<String,Class<?>> ifc2Class = new HashMap<String,Class<?>>();
+    private Map<String,Class<?>> container = new HashMap<String,Class<?>>();
 
     public JavaConfig() {
-        ifc2Class.put("pizzaRepository", InMemPizzaRepository.class);
-        ifc2Class.put("orderRepository", InMemOrderRepository.class);
-        ifc2Class.put("pizzaService", SimplePizzaService.class);
-        ifc2Class.put("orderService", SimpleOrderService.class);
+        container.put("pizzaRepository", InMemPizzaRepository.class);
+        container.put("orderRepository", InMemOrderRepository.class);
+        container.put("pizzaService", SimplePizzaService.class);
+        container.put("orderService", SimpleOrderService.class);
     }
 
-    
     public <T> Class<T> getImpl(String ifc) {
-        return (Class<T>) ifc2Class.get(ifc);
+        return (Class<T>) container.get(ifc);
     }
-    
 }
 
