@@ -12,10 +12,7 @@ public class SimpleDiscountCardService implements DiscountCardService {
     private DiscountCardRepository discountCardRepository;
 
     public void withdrawPoints(DiscountCard card, Double points) {
-        if(card.getPoints() < points)
-             card.setPoints(0.0);
-        else card.setPoints(card.getPoints() - points);
-                
+        card.setPoints(Math.max(0, card.getPoints() - points));
         saveChanges(card);
     }
 
@@ -27,5 +24,4 @@ public class SimpleDiscountCardService implements DiscountCardService {
     private void saveChanges(DiscountCard card) {
         discountCardRepository.save(card);
     }
-    
 }
