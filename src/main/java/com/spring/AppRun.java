@@ -9,7 +9,8 @@ import com.spring.domain.Customer;
 import com.spring.service.OrderService;
 import com.spring.trainings.customioccontainer.config.JavaConfig;
 
-public class DeliveryApp {
+public class AppRun {
+
     public static void main( String[] args ) throws Exception {
         Customer customer = new Customer();
         ApplicationContext context = new JavaConfigApplicationContext(new JavaConfig());
@@ -18,9 +19,5 @@ public class DeliveryApp {
         PizzaService pizzaService = (PizzaService) context.getBean("pizzaService");
         OrderService orderService = (OrderService) context.getBean("orderService");
         System.out.println(pizzaRepository.find(1));
-        
-    
-        
-        
     }
 }
