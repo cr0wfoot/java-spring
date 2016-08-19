@@ -27,7 +27,7 @@ public class SimpleOrderService implements OrderService {
     
     @Override
     public boolean changeStateOfOrder(Order order, OrderState newState) {
-        if(order == null || !order.getState().isAvaliableStateToChange(newState))
+        if(order == null || !order.getState().isAvailableStateToChange(newState))
             return false;
         order.setState(newState);
         saveOrder(order);

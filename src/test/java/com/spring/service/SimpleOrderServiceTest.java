@@ -58,7 +58,7 @@ public class SimpleOrderServiceTest {
      */
     @Test
     public void testChangeStateOfOrder_AvaliableStateToChange_CheckResult() {
-        OrderState inputState = OrderState.IN_PROGRSS;
+        OrderState inputState = OrderState.IN_PROGRESS;
 
         boolean result = instance.changeStateOfOrder(order, inputState);
         
@@ -70,7 +70,7 @@ public class SimpleOrderServiceTest {
      */
     @Test
     public void testChangeStateOfOrder_AvaliableStateToChange_VerifySave() {
-        OrderState inputState = OrderState.IN_PROGRSS;
+        OrderState inputState = OrderState.IN_PROGRESS;
 
         instance.changeStateOfOrder(order, inputState);
         
@@ -82,7 +82,7 @@ public class SimpleOrderServiceTest {
      */
     @Test
     public void testChangeStateOfOrder_AvaliableStateToChange_ChangeState() {
-        OrderState inputState = OrderState.IN_PROGRSS;
+        OrderState inputState = OrderState.IN_PROGRESS;
 
         instance.changeStateOfOrder(order, inputState);
         
@@ -106,7 +106,7 @@ public class SimpleOrderServiceTest {
      */
     @Test
     public void testChangeStateOfOrder_NullOrder() {
-        OrderState inputState = OrderState.IN_PROGRSS;
+        OrderState inputState = OrderState.IN_PROGRESS;
         Order inputOrder = null;
         
         boolean result = instance.changeStateOfOrder(inputOrder, inputState);
