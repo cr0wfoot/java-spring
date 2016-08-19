@@ -8,10 +8,9 @@ import org.springframework.beans.factory.config.ConstructorArgumentValues;
 
 public class CustomBeanFactoryPostProcessor implements BeanFactoryPostProcessor {
 
-    public void postProcessBeanFactory(ConfigurableListableBeanFactory clbf) throws BeansException {
-        BeanDefinition bd = clbf.getBeanDefinition("customer");
-        ConstructorArgumentValues v = bd.getConstructorArgumentValues();
-        v.getArgumentValue(0, null).setValue("Name2");
+    public void postProcessBeanFactory(ConfigurableListableBeanFactory beanFactory) throws BeansException {
+        BeanDefinition beanDefinition = beanFactory.getBeanDefinition("customer");
+        ConstructorArgumentValues argumentValues = beanDefinition.getConstructorArgumentValues();
+        argumentValues.getArgumentValue(0, null).setValue("New Customer Name");
     }
-    
 }

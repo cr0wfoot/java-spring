@@ -9,15 +9,15 @@
         http://www.springframework.org/schema/context
         http://www.springframework.org/schema/context/spring-context.xsd">
 
-    <context:component-scan base-package="com.spring.trainings.repository"/>
+    <context:component-scan base-package="com.spring.repository"/>
     
-    <bean name="pizzaRepository" class="com.spring.trainings.repository.InMemPizzaRepository">
+    <bean name="pizzaRepository" class="com.spring.repository.InMemPizzaRepository">
         <property name="pizzas">
             <map>
                 <entry key="1">
                     <bean name="pizzaFactoryBean" class="com.spring.trainings.beanlifecyclebreak.PizzaFactoryBean">
                         <property name="id" value="1"/>
-                        <property name="name" value="haski"/>
+                        <property name="name" value="SeaPizza"/>
                         <property name="type" value="SEA"/>
                         <property name="price" value="1.0"/>
                     </bean>
@@ -25,7 +25,7 @@
                 <entry key="2">
                     <bean name="pizzaFactoryBean" class="com.spring.trainings.beanlifecyclebreak.PizzaFactoryBean">
                         <property name="id" value="2"/>
-                        <property name="name" value="carbonara"/>
+                        <property name="name" value="VegaPizza"/>
                         <property name="type" value="VEGETARIAN"/>
                         <property name="price" value="2.0"/>
                     </bean>
@@ -33,7 +33,7 @@
                 <entry key="3">
                     <bean name="pizzaFactoryBean" class="com.spring.trainings.beanlifecyclebreak.PizzaFactoryBean">
                         <property name="id" value="3"/>
-                        <property name="name" value="paperoni"/>
+                        <property name="name" value="MeatPizza"/>
                         <property name="type" value="MEAT"/>
                         <property name="price" value="3.0"/>
                     </bean>
@@ -45,8 +45,8 @@
     <bean class="com.spring.trainings.beanlifecyclebreak.BenchmarkBeanPostProcessor"/>
     
     <bean class="com.spring.trainings.beanlifecyclebreak.CustomBeanFactoryPostProcessor"/>
-    <bean name="customer" class="com.spring.trainings.domain.Customer">
-        <constructor-arg value="Name1"/>
+    <bean name="customer" class="com.spring.domain.Customer">
+        <constructor-arg value="Test"/>
     </bean>
     
 </beans>

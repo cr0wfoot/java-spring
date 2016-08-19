@@ -1,7 +1,6 @@
 package com.spring.trainings.beanlifecyclebreak;
 
-import com.spring.trainings.domain.Pizza;
-import com.spring.trainings.domain.Pizza.PizzaType;
+import com.spring.domain.Pizza;
 import org.springframework.beans.factory.FactoryBean;
 
 public class PizzaFactoryBean implements FactoryBean<Pizza> {
@@ -35,11 +34,11 @@ public class PizzaFactoryBean implements FactoryBean<Pizza> {
         this.price = price;
     }
 
-    public PizzaType getType() {
+    public Pizza.PizzaType getType() {
         return type;
     }
 
-    public void setType(PizzaType type) {
+    public void setType(Pizza.PizzaType type) {
         this.type = type;
     }
     
@@ -54,5 +53,4 @@ public class PizzaFactoryBean implements FactoryBean<Pizza> {
     public boolean isSingleton() {
         return true;
     }
-    
 }

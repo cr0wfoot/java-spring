@@ -9,9 +9,9 @@
         http://www.springframework.org/schema/context
         http://www.springframework.org/schema/context/spring-context.xsd">
 
-    <context:component-scan base-package="com.spring.trainings.service"/>
-    <context:component-scan base-package="com.spring.trainings.domain">
-        <context:include-filter type="annotation" expression="com.spring.trainings.context.annotations.MyComponent"/>
+    <context:component-scan base-package="com.spring.service"/>
+    <context:component-scan base-package="com.spring.domain">
+        <context:include-filter type="annotation" expression="com.spring.trainings.annotations.MyComponent"/>
     </context:component-scan>
     
     <bean class="com.spring.trainings.beanlifecyclebreak.BenchmarkBeanPostProcessor"/>
