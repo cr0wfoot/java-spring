@@ -13,24 +13,23 @@ public class InMemOrderRepository implements OrderRepository {
     
     public Integer insert(Order newOrder) {
         if(newOrder == null) return null;
-        Integer id = tempGenerateId();
-        orders.put(id, newOrder);
-        return id;
+        Integer generatedId = generateId();
+        orders.put(generatedId, newOrder);
+        return generatedId;
     }
 
     public Order find(Integer id) {
-        if(id == null || id < 0)
-            return null;
-        return orders.get(id);
+        if(id != null && id >= 0)
+            return orders.get(id);
+        return null;
     }
 
     public void save(Order order) {
-        if(order == null) return;
-        orders.put(order.getId(), order);
+        if(order != null)
+            orders.put(order.getId(), order);
     }
     
-    private Integer tempGenerateId() {
+    private Integer generateId() {
         return orders.size();
     }
-    
 }

@@ -6,8 +6,5 @@ import org.springframework.stereotype.Repository;
 @Repository
 public class InMemDiscountCardRepository implements DiscountCardRepository {
     
-    public void save(DiscountCard card) {
-        
-    }
- 
+    public void save(DiscountCard card) { }
 }
