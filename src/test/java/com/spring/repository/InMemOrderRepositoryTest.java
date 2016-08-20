@@ -9,7 +9,7 @@ import org.junit.*;
 
 public class InMemOrderRepositoryTest {
 
-    public static final double DOUBLE_DELTA = 0.001;
+    private static final double DOUBLE_DELTA = 0.001;
 
     private OrderRepository instance = new InMemOrderRepository();
 
@@ -57,13 +57,14 @@ public class InMemOrderRepositoryTest {
         Order inputOrder = new Order();
         inputOrder.setCurrentPrice(10.0);
         instance.insert(inputOrder);
+        int orderId = 0;
 
         double expectedPrice = 12;
-        inputOrder.setId(0);
+        inputOrder.setId(orderId);
         inputOrder.setCurrentPrice(expectedPrice);
         instance.save(inputOrder);
 
-        assertEquals(expectedPrice, instance.find(0).getCurrentPrice(), DOUBLE_DELTA);
+        assertEquals(expectedPrice, instance.find(orderId).getCurrentPrice(), DOUBLE_DELTA);
     }
 
     @Test
