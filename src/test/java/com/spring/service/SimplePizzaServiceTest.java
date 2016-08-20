@@ -19,37 +19,14 @@ public class SimplePizzaServiceTest {
     
     @InjectMocks
     private SimplePizzaService instance;
-    
-    public SimplePizzaServiceTest() {
-    }
 
-    @BeforeClass
-    public static void setUpClass() throws Exception {
-    }
-
-    @AfterClass
-    public static void tearDownClass() throws Exception {
-    }
-    
-    @Before
-    public void setUp() {
-    }
-    
-    @After
-    public void tearDown() {
-    }
-
-    /**
-     * Test of fing method, of class SimplePizzaService, find Pizza by id
-     */
     @Test
-    public void testFind() {
-        Integer inputId = 1;
-        Pizza fromRepository = new Pizza(1, "Pizza1", 1.0, Pizza.PizzaType.MEAT);
+    public void shouldFindPizza() {
+        int pizzaId = 1;
+        Pizza pizza = new Pizza(pizzaId, "MeatPizza", 1.0, Pizza.PizzaType.MEAT);
         
-        when(repository.find(inputId)).thenReturn(fromRepository);
+        when(repository.find(pizzaId)).thenReturn(pizza);
         
-        Assert.assertEquals(fromRepository, instance.find(inputId));
+        assertEquals(pizza, instance.find(pizzaId));
     }
-    
 }
