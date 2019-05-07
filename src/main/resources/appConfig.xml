@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<beans 
+<beans
     xmlns="http://www.springframework.org/schema/beans"
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xmlns:context="http://www.springframework.org/schema/context"
@@ -11,9 +11,8 @@
 
     <context:component-scan base-package="com.spring.service"/>
     <context:component-scan base-package="com.spring.domain">
-        <context:include-filter type="annotation" expression="com.spring.trainings.annotations.MyComponent"/>
+        <context:include-filter type="annotation" expression="com.example.spring.annotations.MyComponent"/>
     </context:component-scan>
-    
-    <bean class="com.spring.trainings.beanlifecyclebreak.BenchmarkBeanPostProcessor"/>
-    
+
+    <bean class="com.example.spring.beanlifecyclebreak.BenchmarkBeanPostProcessor"/>
 </beans>

@@ -11,11 +11,11 @@
 
     <context:component-scan base-package="com.spring.repository"/>
     
-    <bean name="pizzaRepository" class="com.spring.repository.InMemPizzaRepository">
+    <bean name="pizzaRepository" class="com.example.spring.repository.InMemPizzaRepository">
         <property name="pizzas">
             <map>
                 <entry key="1">
-                    <bean name="pizzaFactoryBean" class="com.spring.trainings.beanlifecyclebreak.PizzaFactoryBean">
+                    <bean name="pizzaFactoryBean" class="com.example.spring.beanlifecyclebreak.PizzaFactoryBean">
                         <property name="id" value="1"/>
                         <property name="name" value="SeaPizza"/>
                         <property name="type" value="SEA"/>
@@ -23,7 +23,7 @@
                     </bean>
                 </entry>
                 <entry key="2">
-                    <bean name="pizzaFactoryBean" class="com.spring.trainings.beanlifecyclebreak.PizzaFactoryBean">
+                    <bean name="pizzaFactoryBean" class="com.example.spring.beanlifecyclebreak.PizzaFactoryBean">
                         <property name="id" value="2"/>
                         <property name="name" value="VegaPizza"/>
                         <property name="type" value="VEGETARIAN"/>
@@ -31,7 +31,7 @@
                     </bean>
                 </entry>
                 <entry key="3">
-                    <bean name="pizzaFactoryBean" class="com.spring.trainings.beanlifecyclebreak.PizzaFactoryBean">
+                    <bean name="pizzaFactoryBean" class="com.example.spring.beanlifecyclebreak.PizzaFactoryBean">
                         <property name="id" value="3"/>
                         <property name="name" value="MeatPizza"/>
                         <property name="type" value="MEAT"/>
@@ -42,11 +42,10 @@
         </property>
     </bean>
     
-    <bean class="com.spring.trainings.beanlifecyclebreak.BenchmarkBeanPostProcessor"/>
+    <bean class="com.example.spring.beanlifecyclebreak.BenchmarkBeanPostProcessor"/>
     
-    <bean class="com.spring.trainings.beanlifecyclebreak.CustomBeanFactoryPostProcessor"/>
-    <bean name="customer" class="com.spring.domain.Customer">
+    <bean class="com.example.spring.beanlifecyclebreak.CustomBeanFactoryPostProcessor"/>
+    <bean name="customer" class="com.example.spring.domain.Customer">
         <constructor-arg value="Test"/>
     </bean>
-    
 </beans>
